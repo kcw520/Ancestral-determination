@@ -1,5 +1,4 @@
-# SuspiciousSequence
-This is the program of our computational method.
+# This is the program of our computational method.
 
 
 Step one: The sequencing runs containing SARS-CoV-2 reads discussed in our paper can be downloaded in FASTQ format in the NCBI’s SRA database (https://www.ncbi.nlm.nih.gov/sra) using their accession number provided in Supplementary Table 1.
