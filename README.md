@@ -1,6 +1,7 @@
 # Pipeline to infer the evolutionary relationship between suspicious SARS-CoV-2 sequences and public SARS-CoV-2 genomes
 
-# Step one: Download the 5196 sequencing runs which were suspected to include the SARS-CoV-2 progenitor.
+Step one: Download the 5196 sequencing runs which were suspected to include the SARS-CoV-2 progenitor.
+
 The sequencing runs containing SARS-CoV-2 reads discussed in our paper can be downloaded from the NCBI’s SRA database (https://www.ncbi.nlm.nih.gov/sra) using the accession number provided in Supplementary Table 1 in our paper.
 
 # Step two:  Reads alignment and files preparation
