@@ -1,17 +1,24 @@
-# This is the program of our computational method.
+# Pipeline to infer the evolutionary relationship between suspicious SARS-CoV-2 sequences and public SARS-CoV-2 genomes
 
+Step one: Download the 5196 sequencing runs which were suspected to include the SARS-CoV-2 progenitor.
+The sequencing runs containing SARS-CoV-2 reads discussed in our paper can be downloaded from the NCBI’s SRA database (https://www.ncbi.nlm.nih.gov/sra) using the accession number provided in Supplementary Table 1 in our paper.
 
-Step one: The sequencing runs containing SARS-CoV-2 reads discussed in our paper can be downloaded in FASTQ format in the NCBI’s SRA database (https://www.ncbi.nlm.nih.gov/sra) using their accession number provided in Supplementary Table 1.
+Step two:  Reads alignment and files preparation
+The sequencing reads were aligned to NC_045512.2 (one of the known earliest SARS-CoV-2 sequences) using BWA mem and the sequencing depth, mpileup files, and read counts files were retrieved from BAM files using Samtools and Varscan. 
+The codes were provided in data preparation.sh.
 
+Step three: SNP calling
+Mutations were called using the code provided in call SNP.cpp. The input file is the read counts file obtained from Step two. 
+The number of SNP is the sum of Nq and Ns in Equations 1&2.
 
-Step two: The sequencing read can be aligned to NC_045512.2 using BWA and the sequencing depth, mpileup files and read counts files can be retrieved from BAM files using Samtools and Varscan. The example code of this part provided in data preparation.sh.
+Step four: Searching for the closest sequences in the public SARS-CoV-2 database for a given Q (questioned sequence)
+The SARS-CoV-2 sequences in public databases (D) with the least number of mutations from Q (smallest Nd+Nq) can be found using the online tool (https://ngdc.cncb.ac.cn/ncov/online/tool/genome-tracing) by providing the mutation list (mutation.txt) obtained from step three. 
+Nd (subject private) and Nq (query private) will be outputted by the online tool.
+Ns can be calculated by Nq + Ns - Nq.
 
+Step five: Infer the evolutionary relationship
+If Q is the progenitor sequence of SARS-CoV-2, the difference between Q and D should be greater than the difference between Q and E (the known earliest SARS-CoV-2 sequence), thus the number of mutations (N) should conform to the following equations: Nd+Nq > Nq +Ns 
+Nd+Nq > Nd+Ns. 
+Please note that all progenitor sequences should conform to the two equations. However, satisfying these two equations unnecessarily implies that the sequence is from the progenitor.
 
-Step three: Mutation was called using the code provided in call SNP.cpp, the input file is the read counts file obtained from Step two and default values are used for other parameters. The mutation number is the difference between one questioned sequence (Q) and the earliest SARS-CoV-2 sequence (E) (NC_045512.2), and is the sum of Nq and Ns mentioned in our equations.
-
-
-Step four: For a given Q, the SARS-CoV-2 sequences in public databases (D) with the least number of mutations from Q sequence (smallest Nd+Nq) can be found using the database (https://ngdc.cncb.ac.cn/ncov/online/tool/genome-tracing) by providing the mutation list (mutation.txt) obtained from step three. The database provides Nd (Subject private) and Nq (Query private) respectively and then Ns can be calculated by knowing the sum of Nq and Ns in step three.
-
-
-Step five: In our computational method, If Q is the progenitor sequence of SARS-CoV-2, the difference between Q and D must be greater than the difference between Q and E, thus the number of mutations (N) should conform to the equations that Nd+Nq > Nq +Ns and Nd+Nq > Nd+Ns. Since Nq, Ns and Nd can be obtained individually from steps above, we can use our computational method to identify the ancestral sequences.
-
+The simulation data generated in the studies and scripts to analyze the simulation data are provided in the Simulation folder.
