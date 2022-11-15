@@ -30,5 +30,13 @@ If Q is the progenitor sequence of SARS-CoV-2, the difference between Q and D sh
 Nd+Nq > Nd+Ns. 
 Please note that all progenitor sequences should conform to the two equations. However, satisfying these two equations unnecessarily implies that the sequence is from the progenitor.
 
+The simulation data generated in the studies and scripts to analyze the simulation data are provided in the Simulation folder, which contains 8 subfiles.
+Ancestors.tsv: This file contains the ancestry information for each sequence.
+MutationAndCount.tsv: This file contains information about the number of mutations at each position of the original sequence.
+SeqInfo.tsv: This file contains information about the mutation site and progenies of each sequence.
+Simu_mutlist.tsv: This file contains the mutation information for each sequence.
+collateral_ancestor.sh: This file provides the analysis code when Q is a collateral ancestor.
+descendant.sh: This file provides the analysis code when Q is a descendant.
+direct_ancestor.sh: This file provides the analysis code when Q is a direct ancestor.
+Simulation_result.xlsx: This file shows the results of the simulation section.
 
-The simulation data generated in the studies and scripts to analyze the simulation data are provided in the Simulation folder.
